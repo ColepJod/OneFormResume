@@ -1,0 +1,70 @@
+<!-- templates/accounts/login.html -->
+
+{% extends 'base.html' %} {% block title %}Login - Resume Builder{% endblock %}
+{% block content %}
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1>Welcome Back</h1>
+      <p>Login to access your resume</p>
+    </div>
+
+    <form method="POST" class="auth-form">
+      {% csrf_token %}
+
+      <!-- Display non-field errors -->
+      {% if form.non_field_errors %}
+      <div class="error-box">
+        {% for error in form.non_field_errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Username Field -->
+      <div class="form-group">
+        <label for="id_username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="id_username"
+          class="form-input"
+          placeholder="Enter your username"
+          required
+        />
+        {% if form.username.errors %}
+        <div class="error-text">
+          {% for error in form.username.errors %} {{ error }} {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="id_password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="id_password"
+          class="form-input"
+          placeholder="Enter your password"
+          required
+        />
+        {% if form.password.errors %}
+        <div class="error-text">
+          {% for error in form.password.errors %} {{ error }} {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full">Login</button>
+    </form>
+
+    <div class="auth-footer">
+      <p>
+        Don't have an account? <a href="{% url 'register' %}">Register here</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

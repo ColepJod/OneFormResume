@@ -1,0 +1,178 @@
+<!-- templates/resume/resume_form.html -->
+
+{% extends 'base.html' %} {% block title %}{{ title }} - Resume Builder{%endblock %} {% block content %}
+<div class="form-page">
+  <div class="form-container">
+    <div class="form-header">
+      <h1>{{ title }}</h1>
+      <p>
+        Fill in your details below. All fields are optional except Full Name.
+      </p>
+    </div>
+
+    <form method="POST" class="resume-form">
+      {% csrf_token %}
+
+      <!-- Personal Information Section -->
+      <div class="form-section">
+        <h2 class="section-title">👤 Personal Information</h2>
+
+        <div class="form-group">
+          <label for="id_full_name"
+            >Full Name <span class="required">*</span></label
+          >
+          {{ form.full_name }} {% if form.full_name.errors %}
+          <div class="error-text">
+            {% for error in form.full_name.errors %} {{ error }} {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <label for="id_about_me">About Me</label>
+          {{ form.about_me }}
+          <small class="help-text"
+            >Write a brief introduction about yourself</small
+          >
+          {% if form.about_me.errors %}
+          <div class="error-text">
+            {% for error in form.about_me.errors %} {{ error }} {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Skills Section -->
+      <div class="form-section">
+        <h2 class="section-title">💡 Skills</h2>
+
+        <div class="form-group">
+          <label for="id_skills">Your Skills</label>
+          {{ form.skills }}
+          <small class="help-text">{{ form.skills.help_text }}</small>
+          {% if form.skills.errors %}
+          <div class="error-text">
+            {% for error in form.skills.errors %} {{ error }} {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Education Section -->
+      <div class="form-section">
+        <h2 class="section-title">🎓 Education</h2>
+
+        <div class="form-group">
+          <label for="id_education">Education History</label>
+          {{ form.education }}
+          <small class="help-text">{{ form.education.help_text }}</small>
+          {% if form.education.errors %}
+          <div class="error-text">
+            {% for error in form.education.errors %} {{ error }} {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Experience Section -->
+      <div class="form-section">
+        <h2 class="section-title">💼 Work Experience</h2>
+
+        <div class="form-group">
+          <label for="id_experience">Work Experience</label>
+          {{ form.experience }}
+          <small class="help-text">{{ form.experience.help_text }}</small>
+          {% if form.experience.errors %}
+          <div class="error-text">
+            {% for error in form.experience.errors %} {{ error }} {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Projects Section -->
+      <div class="form-section">
+        <h2 class="section-title">🚀 Projects</h2>
+
+        <div class="form-group">
+          <label for="id_projects">Your Projects</label>
+          {{ form.projects }}
+          <small class="help-text">{{ form.projects.help_text }}</small>
+          {% if form.projects.errors %}
+          <div class="error-text">
+            {% for error in form.projects.errors %} {{ error }} {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Contact Information Section -->
+      <div class="form-section">
+        <h2 class="section-title">📞 Contact Information</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="id_contact_email">Email Address</label>
+            {{ form.contact_email }} {% if form.contact_email.errors %}
+            <div class="error-text">
+              {% for error in form.contact_email.errors %} {{ error }} {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="id_contact_phone">Phone Number</label>
+            {{ form.contact_phone }} {% if form.contact_phone.errors %}
+            <div class="error-text">
+              {% for error in form.contact_phone.errors %} {{ error }} {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="id_contact_address">Address</label>
+          {{ form.contact_address }} {% if form.contact_address.errors %}
+          <div class="error-text">
+            {% for error in form.contact_address.errors %} {{ error }} {% endfor  %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Social Links Section -->
+      <div class="form-section">
+        <h2 class="section-title">🔗 Social Links</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="id_linkedin">LinkedIn Profile</label>
+            {{ form.linkedin }} {% if form.linkedin.errors %}
+            <div class="error-text">
+              {% for error in form.linkedin.errors %} {{ error }} {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="id_github">GitHub Profile</label>
+            {{ form.github }} {% if form.github.errors %}
+            <div class="error-text">
+              {% for error in form.github.errors %} {{ error }} {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Buttons -->
+      <div class="form-actions">
+        <a href="{% url 'dashboard' %}" class="btn btn-outline">Cancel</a>
+        <button type="submit" class="btn btn-primary btn-lg">
+          {{ button_text }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

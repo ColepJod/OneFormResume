@@ -1,0 +1,99 @@
+<!-- templates/resume/dashboard.html -->
+
+{% extends 'base.html' %} {% block title %}Dashboard - Resume Builder  {%endblock%} {% block content %}
+
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h1>Welcome, {{ user.username }}! 👋</h1>
+    <p>Manage your resume and portfolio from here</p>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- Resume Card -->
+    <div class="dashboard-card">
+      <div class="dashboard-card-icon">📝</div>
+      <h3>Resume Details</h3>
+      {% if has_resume %}
+      <p>Edit your resume information</p>
+      <a href="{% url 'resume_edit' %}" class="btn btn-primary">Edit Resume</a>
+      {% else %}
+      <p>You haven't created a resume yet</p>
+      <a href="{% url 'resume_create' %}" class="btn btn-primary"
+        >Create Resume</a
+      >
+      {% endif %}
+    </div>
+
+    <!-- Portfolio Card -->
+    <div class="dashboard-card">
+      <div class="dashboard-card-icon">🌐</div>
+      <h3>My Portfolio</h3>
+      {% if has_resume %}
+      <p>View your online portfolio page</p>
+      <a href="{% url 'portfolio' %}" class="btn btn-secondary"
+        >View Portfolio</a
+      >
+      {% else %}
+      <p>Create a resume to see your portfolio</p>
+      <a href="{% url 'resume_create' %}" class="btn btn-secondary"
+        >Create First</a
+      >
+      {% endif %}
+    </div>
+
+    <!-- Download PDF Card -->
+    <div class="dashboard-card">
+      <div class="dashboard-card-icon">📄</div>
+      <h3>Download PDF</h3>
+      {% if has_resume %}
+      <p>Download your resume as PDF</p>
+      <a href="{% url 'download_pdf' %}" class="btn btn-success"
+        >Download PDF</a
+      >
+      {% else %}
+      <p>Create a resume to download PDF</p>
+      <a href="{% url 'resume_create' %}" class="btn btn-secondary"
+        >Create First</a
+      >
+      {% endif %}
+    </div>
+
+    <!-- Account Card -->
+    <div class="dashboard-card">
+      <div class="dashboard-card-icon">👤</div>
+      <h3>Account</h3>
+      <p>Logged in as: {{ user.email }}</p>
+      <a href="{% url 'logout' %}" class="btn btn-outline">Logout</a>
+    </div>
+  </div>
+
+  <!-- Resume Preview (if exists) -->
+  {% if has_resume %}
+  <div class="resume-preview-section">
+    <h2>Resume Preview</h2>
+    <div class="resume-preview-card">
+      <div class="preview-header">
+        <h3>{{ resume.full_name }}</h3>
+        <p>{{ resume.contact_email }}</p>
+      </div>
+
+      {% if resume.about_me %}
+      <div class="preview-section">
+        <h4>About</h4>
+        <p>{{ resume.about_me|truncatewords:30 }}</p>
+      </div>
+      {% endif %} {% if resume.skills %}
+      <div class="preview-section">
+        <h4>Skills</h4>
+        <p>{{ resume.skills|truncatewords:15 }}</p>
+      </div>
+      {% endif %}
+
+      <p class="preview-note">
+        <em>Last updated: {{ resume.updated_at|date:"F d, Y" }}</em>
+      </p>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

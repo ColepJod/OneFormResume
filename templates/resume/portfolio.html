@@ -1,0 +1,88 @@
+<!-- templates/resume/portfolio.html -->
+
+{% extends 'base.html' %} {% block title %}{{ resume.full_name }} - Portfolio{%endblock %} {% block content %}
+<div class="portfolio-page">
+  <div class="portfolio-container">
+    <!-- Header Section -->
+    <header class="portfolio-header">
+      <h1>{{ resume.full_name }}</h1>
+      {% if resume.about_me %}
+      <p class="tagline">{{ resume.about_me }}</p>
+      {% endif %}
+
+      <!-- Contact Info Pills -->
+      <div class="contact-pills">
+        {% if resume.contact_email %}
+        <span class="pill">📧 {{ resume.contact_email }}</span>
+        {% endif %} {% if resume.contact_phone %}
+        <span class="pill">📱 {{ resume.contact_phone }}</span>
+        {% endif %} {% if resume.contact_address %}
+        <span class="pill">📍 {{ resume.contact_address }}</span>
+        {% endif %}
+      </div>
+
+      <!-- Social Links -->
+      <div class="social-links">
+        {% if resume.linkedin %}
+        <a href="{{ resume.linkedin }}" target="_blank" class="social-link">
+          🔗 LinkedIn
+        </a>
+        {% endif %} {% if resume.github %}
+        <a href="{{ resume.github }}" target="_blank" class="social-link">
+          💻 GitHub
+        </a>
+        {% endif %}
+      </div>
+    </header>
+
+    <!-- Skills Section -->
+    {% if skills_list %}
+    <section class="portfolio-section">
+      <h2>💡 Skills</h2>
+      <div class="skills-container">
+        {% for skill in skills_list %}
+        <span class="skill-tag">{{ skill }}</span>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- Education Section -->
+    {% if resume.education %}
+    <section class="portfolio-section">
+      <h2>🎓 Education</h2>
+      <div class="section-content">{{ resume.education|linebreaks }}</div>
+    </section>
+    {% endif %}
+
+    <!-- Experience Section -->
+    {% if resume.experience %}
+    <section class="portfolio-section">
+      <h2>💼 Work Experience</h2>
+      <div class="section-content">{{ resume.experience|linebreaks }}</div>
+    </section>
+    {% endif %}
+
+    <!-- Projects Section -->
+    {% if resume.projects %}
+    <section class="portfolio-section">
+      <h2>🚀 Projects</h2>
+      <div class="section-content">{{ resume.projects|linebreaks }}</div>
+    </section>
+    {% endif %}
+
+    <!-- Action Buttons -->
+    <div class="portfolio-actions">
+      <a href="{% url 'dashboard' %}" class="btn btn-outline"
+        >← Back to Dashboard</a
+      >
+      <a href="{% url 'download_pdf' %}" class="btn btn-success"
+        >📄 Download PDF</a
+      >
+      <a href="{% url 'resume_edit' %}" class="btn btn-primary"
+        >✏️ Edit Resume</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}

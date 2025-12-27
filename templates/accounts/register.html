@@ -1,0 +1,67 @@
+<!-- templates/accounts/register.html -->
+
+{% extends 'base.html' %} {% block title %}Register - Resume Builder
+{%endblock%} {% block content %}
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1>Create Account</h1>
+      <p>Join us and build your professional resume</p>
+    </div>
+
+    <form method="POST" class="auth-form">
+      {% csrf_token %}
+
+      <!-- Username Field -->
+      <div class="form-group">
+        <label for="id_username">Username</label>
+        {{ form.username }} {% if form.username.errors %}
+        <div class="error-text">
+          {% for error in form.username.errors %} {{ error }} {% endfor %}
+        </div>
+        {% endif %}
+        <small class="help-text">{{ form.username.help_text }}</small>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="id_email">Email</label>
+        {{ form.email }} {% if form.email.errors %}
+        <div class="error-text">
+          {% for error in form.email.errors %} {{ error }} {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="id_password1">Password</label>
+        {{ form.password1 }} {% if form.password1.errors %}
+        <div class="error-text">
+          {% for error in form.password1.errors %} {{ error }} {% endfor %}
+        </div>
+        {% endif %}
+        <small class="help-text">{{ form.password1.help_text }}</small>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="form-group">
+        <label for="id_password2">Confirm Password</label>
+        {{ form.password2 }} {% if form.password2.errors %}
+        <div class="error-text">
+          {% for error in form.password2.errors %} {{ error }} {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full">
+        Create Account
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

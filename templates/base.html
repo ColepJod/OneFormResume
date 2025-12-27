@@ -1,0 +1,57 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Resume Builder{% endblock %}</title>
+
+    <!-- Link to our CSS file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="{% url 'home' %}" class="nav-logo">📄 Resume Builder</a>
+
+        <div class="nav-links">
+          {% if user.is_authenticated %}
+          <!-- Links for logged-in users -->
+          <a href="{% url 'dashboard' %}">Dashboard</a>
+          <a href="{% url 'portfolio' %}">My Portfolio</a>
+          <a href="{% url 'logout' %}" class="btn btn-outline">Logout</a>
+          {% else %}
+          <!-- Links for guests -->
+          <a href="{% url 'login' %}" class="btn btn-outline">Login</a>
+          <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <!-- Messages (success, error, etc.) -->
+    {% if messages %}
+    <div class="messages-container">
+      {% for message in messages %}
+      <div class="message message-{{ message.tags }}">
+        {{ message }}
+        <button class="message-close" onclick="this.parentElement.remove()">
+          ×
+        </button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content - Each page fills this block -->
+    <main class="main-content">{% block content %} {% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2024 Resume Builder. Built with Django 💚</p>
+    </footer>
+  </body>
+</html>
