@@ -103,14 +103,4 @@ python manage.py migrate
 ## Next steps (suggested)
 - Add a `requirements.txt` listing exact dependency versions: `pip freeze > requirements.txt` after installing.
 - Implement or confirm the `download_pdf` view and add tests around resume creation and portfolio rendering.
-- Add deployment notes and secrets handling (don't leave `DEBUG = True` or hard-coded secret keys in production).
-
-## License & attribution
-Add a LICENSE file if you plan to publish or share this repository publicly.
-
----
-
-If you want, I can also:
-- create a `requirements.txt` with the current minimal dependencies,
-- add a `README` section with example screenshots or route references, or
-- open and run the development server to verify everything works locally.
+- Add deployment notes and secrets handling (don't leave `DEBUG = True` or hard-coded secret keys in production)
