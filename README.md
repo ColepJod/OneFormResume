@@ -100,7 +100,3 @@ python manage.py migrate
 - The `ResumeForm` excludes the `user` field (the view sets it automatically).
 - If PDF download is required, ensure the corresponding view and any third-party PDF library (like `WeasyPrint`, `xhtml2pdf`, or `reportlab`) are installed and configured.
 
-## Next steps (suggested)
-- Add a `requirements.txt` listing exact dependency versions: `pip freeze > requirements.txt` after installing.
-- Implement or confirm the `download_pdf` view and add tests around resume creation and portfolio rendering.
-- Add deployment notes and secrets handling (don't leave `DEBUG = True` or hard-coded secret keys in production)
